@@ -59,7 +59,9 @@ header {
   font-size: 1.2rem;
 }
 
-.open-view {
+.open-view,
+.classic-view,
+.difficult-view {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -68,8 +70,8 @@ header {
   color: #6b6b83;
 }
 
-.classic-box,
-.difficult-box {
+.classic-btn,
+.difficult-btn {
   padding: 2%;
   border: 2px solid #6b6b83;
   border-radius: 7px;
@@ -77,4 +79,9 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
