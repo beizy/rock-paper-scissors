@@ -60,8 +60,7 @@ header {
 }
 
 .open-view,
-.classic-view,
-.difficult-view {
+.game-view {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -71,7 +70,8 @@ header {
 }
 
 .classic-btn,
-.difficult-btn {
+.difficult-btn,
+.gohome-btn {
   padding: 2%;
   border: 2px solid #6b6b83;
   border-radius: 7px;
@@ -80,6 +80,31 @@ header {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  color: #6b6b83;
+}
+
+.fighters-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.classic-view h2 {
+  text-align: center;
+}
+
+.fighters-box img {
+  width: 130px;
+  height: 130px;
+}
+
+.fighters-box img:hover {
+  border: 2px dashed #f7797d;
+  border-radius: 20px;
 }
 
 .hidden {

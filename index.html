@@ -4,11 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
+
+    <!-- <script src="player.js"></script>
+    <script src="game.js"></script> -->
   </head>
   <body>
     <header>Rock, Paper, Scissors!</header>
@@ -18,7 +18,7 @@
       <div>Wins : <span id="human-wins">0</span></div>
     </section>
     <section class="middle-bar">
-      <article class="open-view">
+      <div class="open-view">
         <h2>Choose your game!</h2>
         <div class="classic-btn">
           <h3>CLASSIC</h3>
@@ -29,30 +29,30 @@
         <div class="difficult-btn">
           <h3>DIFFICULT</h3>
           <p>rock > scissors & lizzard</p>
-          <p>lizzard > spock & paper</p>
-          <p>spock > scissors & rock</p>
+          <p>lizzard > alien & paper</p>
+          <p>alien > scissors & rock</p>
           <p>scissors > paper & lizzard</p>
-          <p>paper > rock & spock</p>
+          <p>paper > rock & alien</p>
         </div>
-      </article>
-      <article class="classic-view hidden">
+      </div>
+      <div class="game-view hidden">
         <h2>Choose your fighter!</h2>
-        <div class="classic-fighters-box">
-          <img src="./assets/happy-rocks.png" alt="rock image" />
-          <img src="./assets/happy-scissors.png" alt="scissors image" />
-          <img src="./assets/happy-paper.png" alt="paper image" />
+        <div class="fighters-box">
+          <img src="./assets/happy-rocks.png" alt="rock image" id="rock" />
+          <img src="./assets/happy-scissors.png" alt="scissors image" id="scissors" />
+          <img src="./assets/happy-paper.png" alt="paper image" id="paper" />
+          <img src="./assets/lines-alien.png" alt="alien image" class="hidden" id="alien" />
+          <img src="./assets/flat-lizard.png" alt="lizzard image" class="hidden" id="lizzard" />
         </div>
-      </article>
-      <article class="difficult-view hidden"></article>
+        <button class="gohome-btn">CHANGE GAME?</button>
+      </div>
     </section>
     <section class="sidebar right-bar">
       <p>🖥</p>
       <h2>Computer</h2>
       <div>Wins : <span id="computer-wins">0</span></div>
     </section>
-    <footer></footer>
-    <script scr="main.js"></script>
-    <script scr="player.js"></script>
-    <script scr="game.js"></script>
+    <footer id="footer"></footer>
+    <script src="main.js"></script>
   </body>
 </html>
