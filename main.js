@@ -6,10 +6,14 @@ var goHomeBtn = document.querySelector(".gohome-btn");
 var alienImg = document.getElementById("alien");
 var lizzardImg = document.getElementById("lizzard");
 var fightersBox = document.querySelector(".fighters-box");
-var human = new Player("Human");
-var computer = new Player("Computer");
-var game = new Game(human, computer);
+var fightersList = document.querySelectorAll(".fighters-box>img");
+var human;
+var computer;
+var game;
+var humanWins = document.getElementById("human-wins");
+var computerWins = document.getElementById("computer-wins");
 
+window.addEventListener("load", retrieveWins);
 classicGameBtn.addEventListener("click", showClassicGame);
 difficultGameBtn.addEventListener("click", showDifficultGame);
 goHomeBtn.addEventListener("click", showHomePage);
@@ -19,12 +23,26 @@ fightersBox.addEventListener("click", function (event) {
   displayResult();
 });
 
+function retrieveWins() {
+  if (localStorage.getItem("Human") && localStorage.getItem("Computer")) {
+    human = JSON.parse(localStorage.getItem("Human"));
+    computer = JSON.parse(localStorage.getItem("Computer"));
+    humanWins.innerText = human.wins;
+    computerWins.innerText = computer.wins;
+  } else {
+    human = new Player("Human");
+    computer = new Player("Computer");
+  }
+  game = new Game(human, computer);
+}
+
 function showClassicGame() {
   openView.classList.add("hidden");
   gameView.classList.remove("hidden");
   alienImg.classList.add("hidden");
   lizzardImg.classList.add("hidden");
   game.selectGame("classic");
+  console.log(`game mode is now ${game.mode}`);
 }
 
 function showDifficultGame() {
@@ -34,6 +52,7 @@ function showDifficultGame() {
   alienImg.classList.remove("hidden");
   lizzardImg.classList.remove("hidden");
   game.selectGame("difficult");
+  console.log(`game mode is now ${game.mode}`);
 }
 
 function showHomePage() {
@@ -42,10 +61,45 @@ function showHomePage() {
 }
 
 function pickFighter(event) {
+  event.preventDefault();
   human.fighter = event.target.id;
-  console.log("💎 ~ pickFighter ~ human.fighter", human.fighter);
   var randomIndex = Math.floor(Math.random() * game.fighters.length);
   computer.fighter = game.fighters[randomIndex];
-  console.log("💎 ~ pickFighter ~ computer.fighter", computer.fighter);
-  // computer.fighter =
+  console.log(human.fighter);
+  console.log(computer.fighter);
+}
+
+function startGame() {
+  if (game.mode === "classic") {
+    var result = game.checkWinClassic();
+    console.log("classic result", result);
+  } else if (game.mode === "difficult") {
+    var result = game.checkWinDifficult();
+    console.log("difficult result", result);
+  }
+  game.updateScore(result);
+
+  console.log(human.wins);
+  console.log(computer.wins);
+}
+
+function displayResult() {
+  humanWins.innerText = human.wins;
+  computerWins.innerText = computer.wins;
+  fightersArr = Array.from(fightersList);
+  console.log("children array is", fightersArr);
+  console.log(fightersArr[0]);
+  // for (var i= 0; i<childrenArr.length; i++){
+  //   if(childrenArr[i].id !== human.fighter && childrenArr[i].id !==computer.fighter){
+  //     fightersBox.childNodes[i].classList.add('hidden')
+  //   }
+  // }
+  // if (result !== "draw") {
+  //   if (result) {
+  //   } else {
+  //     this.player2.wins++;
+  //   }
+  // // }
+  // human.savePlayerToStorage();
+  // computer.savePlayerToStorage();
 }
