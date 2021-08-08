@@ -4,13 +4,14 @@ var resultView = document.querySelector(".result-view");
 var classicGameBtn = document.querySelector(".classic-btn");
 var difficultGameBtn = document.querySelector(".difficult-btn");
 var goHomeBtn = document.querySelector(".gohome-btn");
+var startOverBtn = document.querySelector(".start-over-btn");
 var alienImg = document.getElementById("alien");
 var lizzardImg = document.getElementById("lizzard");
 var fightersBox = document.querySelector(".fighters-box");
 var resultBox = document.querySelector(".result-box");
 var resultAlert = document.querySelector(".result-view>h2");
-var human;
-var computer;
+var human = new Player("Human");
+var computer = new Player("Computer");
 var game;
 var result;
 var humanWins = document.getElementById("human-wins");
@@ -21,23 +22,21 @@ window.addEventListener("load", retrieveWins);
 classicGameBtn.addEventListener("click", showClassicGame);
 difficultGameBtn.addEventListener("click", showDifficultGame);
 goHomeBtn.addEventListener("click", showHomePage);
+startOverBtn.addEventListener("click", clearWins);
 fightersBox.addEventListener("click", function (event) {
   pickFighter(event);
   startGame();
   displayResult();
-  setTimeout(backToGame, 1500);
+  setTimeout(backToGame, 2000);
   saveResult();
 });
 
 function retrieveWins() {
   if (localStorage.getItem("Human") && localStorage.getItem("Computer")) {
-    human = JSON.parse(localStorage.getItem("Human"));
-    computer = JSON.parse(localStorage.getItem("Computer"));
+    human.wins = human.getWinsFromStorage();
+    computer.wins = computer.getWinsFromStorage();
     humanWins.innerText = human.wins;
     computerWins.innerText = computer.wins;
-  } else {
-    human = new Player("Human");
-    computer = new Player("Computer");
   }
   game = new Game(human, computer);
 }
@@ -136,7 +135,16 @@ function saveResult() {
   if (isClickValid === false) {
     return;
   }
-  human.savePlayerToStorage();
-  computer.savePlayerToStorage();
-  console.log("save fn is working");
+  console.log("human before saving", human);
+  human.saveWinsToStorage();
+  console.log("huamn after saving", human);
+  console.log("comp before saving", computer);
+  computer.saveWinsToStorage();
+  console.log("comp after saving", computer);
+}
+
+function clearWins() {
+  game.resetGame();
+  showHomePage();
+  retrieveWins();
 }

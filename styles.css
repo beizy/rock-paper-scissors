@@ -72,7 +72,8 @@ header {
 
 .classic-btn,
 .difficult-btn,
-.gohome-btn {
+.gohome-btn,
+.start-over-btn {
   padding: 2%;
   border: 2px solid #6b6b83;
   border-radius: 7px;
@@ -85,7 +86,8 @@ header {
 }
 
 .fighters-box,
-.result-box {
+.result-box,
+.button-container {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
