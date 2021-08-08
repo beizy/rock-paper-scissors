@@ -42,6 +42,7 @@ function showClassicGame() {
   alienImg.classList.add("hidden");
   lizzardImg.classList.add("hidden");
   game.selectGame("classic");
+  console.log(`game mode is now ${game.mode}`);
 }
 
 function showDifficultGame() {
@@ -51,6 +52,7 @@ function showDifficultGame() {
   alienImg.classList.remove("hidden");
   lizzardImg.classList.remove("hidden");
   game.selectGame("difficult");
+  console.log(`game mode is now ${game.mode}`);
 }
 
 function showHomePage() {
@@ -68,10 +70,12 @@ function pickFighter(event) {
 }
 
 function startGame() {
-  if ((game.mode = "classic")) {
+  if (game.mode === "classic") {
     var result = game.checkWinClassic();
-  } else if ((game.mode = "difficult")) {
+    console.log("classic result", result);
+  } else if (game.mode === "difficult") {
     var result = game.checkWinDifficult();
+    console.log("difficult result", result);
   }
   game.updateScore(result);
 
@@ -95,7 +99,7 @@ function displayResult() {
   //   } else {
   //     this.player2.wins++;
   //   }
-  // }
-  human.savePlayerToStorage();
-  computer.savePlayerToStorage();
+  // // }
+  // human.savePlayerToStorage();
+  // computer.savePlayerToStorage();
 }
