@@ -68,6 +68,8 @@ function pickFighter(event) {
     alert("Oops, you didn't choose a fighter.");
     isClickValid = false;
     return;
+  } else if (event.target.tagName === "IMG") {
+    isClickValid = true;
   }
   human.fighter = event.target.id;
   var randomIndex = Math.floor(Math.random() * game.fighters.length);
