@@ -5,7 +5,7 @@ class Player {
     this.fighter = "";
   }
 
-  saveWinsToStorage() {
+  savePlayerToStorage() {
     var strPlayer = JSON.stringify(this);
     localStorage.setItem(this.name, strPlayer);
   }

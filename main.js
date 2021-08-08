@@ -6,10 +6,13 @@ var goHomeBtn = document.querySelector(".gohome-btn");
 var alienImg = document.getElementById("alien");
 var lizzardImg = document.getElementById("lizzard");
 var fightersBox = document.querySelector(".fighters-box");
-var human = new Player("Human");
-var computer = new Player("Computer");
-var game = new Game(human, computer);
+var human;
+var computer;
+var game;
+var humanWins = document.getElementById("human-wins");
+var computerWins = document.getElementById("computer-wins");
 
+window.addEventListener("load", retrieveWins);
 classicGameBtn.addEventListener("click", showClassicGame);
 difficultGameBtn.addEventListener("click", showDifficultGame);
 goHomeBtn.addEventListener("click", showHomePage);
@@ -18,6 +21,19 @@ fightersBox.addEventListener("click", function (event) {
   startGame();
   displayResult();
 });
+
+function retrieveWins() {
+  if (localStorage.getItem("Human") && localStorage.getItem("Computer")) {
+    human = JSON.parse(localStorage.getItem("Human"));
+    computer = JSON.parse(localStorage.getItem("Computer"));
+    humanWins.innerText = human.wins;
+    computerWins.innerText = computer.wins;
+  } else {
+    human = new Player("Human");
+    computer = new Player("Computer");
+  }
+  game = new Game(human, computer);
+}
 
 function showClassicGame() {
   openView.classList.add("hidden");
