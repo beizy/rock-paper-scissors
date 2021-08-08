@@ -9,13 +9,13 @@ var lizzardImg = document.getElementById("lizzard");
 var fightersBox = document.querySelector(".fighters-box");
 var resultBox = document.querySelector(".result-box");
 var resultAlert = document.querySelector(".result-view>h2");
-// var fightersList = document.querySelectorAll(".fighters-box>img");
 var human;
 var computer;
 var game;
 var result;
 var humanWins = document.getElementById("human-wins");
 var computerWins = document.getElementById("computer-wins");
+var isClickValid;
 
 window.addEventListener("load", retrieveWins);
 classicGameBtn.addEventListener("click", showClassicGame);
@@ -26,6 +26,7 @@ fightersBox.addEventListener("click", function (event) {
   startGame();
   displayResult();
   setTimeout(backToGame, 1500);
+  saveResult();
 });
 
 function retrieveWins() {
@@ -64,7 +65,11 @@ function showHomePage() {
 }
 
 function pickFighter(event) {
-  event.preventDefault();
+  if (event.target.tagName !== "IMG") {
+    alert("Oops, you didn't choose a fighter.");
+    isClickValid = false;
+    return;
+  }
   human.fighter = event.target.id;
   var randomIndex = Math.floor(Math.random() * game.fighters.length);
   computer.fighter = game.fighters[randomIndex];
@@ -73,6 +78,9 @@ function pickFighter(event) {
 }
 
 function startGame() {
+  if (isClickValid === false) {
+    return;
+  }
   if (game.mode === "classic") {
     result = game.checkWinClassic();
     console.log("classic result", result);
@@ -87,6 +95,9 @@ function startGame() {
 }
 
 function displayResult() {
+  if (isClickValid === false) {
+    return;
+  }
   humanWins.innerText = human.wins;
   computerWins.innerText = computer.wins;
   gameView.classList.add("hidden");
@@ -109,17 +120,23 @@ function displayResult() {
   resultBox.appendChild(humanFighterImg.cloneNode());
   var compFighterImg = document.getElementById(`${computer.fighter}`);
   resultBox.appendChild(compFighterImg.cloneNode());
-
-  // resultView.setTimeout(backToGame(), 3000);
 }
 
 function backToGame() {
+  if (isClickValid === false) {
+    return;
+  }
   resultAlert.innerText = "";
   resultBox.innerHTML = "";
   gameView.classList.remove("hidden");
   resultView.classList.add("hidden");
 }
 
-// }
-// human.savePlayerToStorage();
-// computer.savePlayerToStorage();
+function saveResult() {
+  if (isClickValid === false) {
+    return;
+  }
+  human.savePlayerToStorage();
+  computer.savePlayerToStorage();
+  console.log("save fn is working");
+}

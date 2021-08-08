@@ -14,6 +14,4 @@ class Player {
     var playerObj = JSON.parse(localStorage.getItem(this.name));
     return playerObj.wins;
   }
-
-  takeTurn() {}
 }
