@@ -19,11 +19,6 @@ class Game {
     }
   }
 
-  // selectFighter(fighter1, fighter2) {
-  //   this.player1.fighter = fighter1;
-  //   this.player2.fighter = fighter2;
-  // }
-
   checkWinClassic() {
     //result is in the view of player1, true means player1 wins
     var classicRules = [
@@ -81,8 +76,11 @@ class Game {
   }
 
   resetGame() {
-    // this.fighters = [];
     this.player1.fighter = null;
     this.player1.fighter = null;
+    this.player1.wins = 0;
+    this.player2.wins = 0;
+    this.player1.saveWinsToStorage();
+    this.player2.saveWinsToStorage();
   }
 }

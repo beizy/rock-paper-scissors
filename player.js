@@ -5,15 +5,13 @@ class Player {
     this.fighter = "";
   }
 
-  savePlayerToStorage() {
-    var strPlayer = JSON.stringify(this);
-    localStorage.setItem(this.name, strPlayer);
+  saveWinsToStorage() {
+    var strWins = JSON.stringify(this.wins);
+    localStorage.setItem(this.name, strWins);
   }
 
   getWinsFromStorage() {
-    var playerObj = JSON.parse(localStorage.getItem(this.name));
-    return playerObj.wins;
+    var retrievedWins = JSON.parse(localStorage.getItem(this.name));
+    return parseInt(retrievedWins);
   }
-
-  takeTurn() {}
 }
