@@ -60,7 +60,8 @@ header {
 }
 
 .open-view,
-.game-view {
+.game-view,
+.result-view {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -83,7 +84,8 @@ header {
   color: #6b6b83;
 }
 
-.fighters-box {
+.fighters-box,
+.result-box {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -97,7 +99,8 @@ header {
   text-align: center;
 }
 
-.fighters-box img {
+.fighters-box img,
+.result-box img {
   width: 130px;
   height: 130px;
 }
@@ -105,6 +108,10 @@ header {
 .fighters-box img:hover {
   border: 2px dashed #f7797d;
   border-radius: 20px;
+}
+
+.result-box h2 {
+  margin-top: 10%;
 }
 
 .hidden {

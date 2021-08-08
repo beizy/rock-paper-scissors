@@ -1,15 +1,19 @@
 var openView = document.querySelector(".open-view");
 var gameView = document.querySelector(".game-view");
+var resultView = document.querySelector(".result-view");
 var classicGameBtn = document.querySelector(".classic-btn");
 var difficultGameBtn = document.querySelector(".difficult-btn");
 var goHomeBtn = document.querySelector(".gohome-btn");
 var alienImg = document.getElementById("alien");
 var lizzardImg = document.getElementById("lizzard");
 var fightersBox = document.querySelector(".fighters-box");
-var fightersList = document.querySelectorAll(".fighters-box>img");
+var resultBox = document.querySelector(".result-box");
+var resultAlert = document.querySelector(".result-view>h2");
+// var fightersList = document.querySelectorAll(".fighters-box>img");
 var human;
 var computer;
 var game;
+var result;
 var humanWins = document.getElementById("human-wins");
 var computerWins = document.getElementById("computer-wins");
 
@@ -21,6 +25,7 @@ fightersBox.addEventListener("click", function (event) {
   pickFighter(event);
   startGame();
   displayResult();
+  setTimeout(backToGame, 1500);
 });
 
 function retrieveWins() {
@@ -42,7 +47,6 @@ function showClassicGame() {
   alienImg.classList.add("hidden");
   lizzardImg.classList.add("hidden");
   game.selectGame("classic");
-  console.log(`game mode is now ${game.mode}`);
 }
 
 function showDifficultGame() {
@@ -52,7 +56,6 @@ function showDifficultGame() {
   alienImg.classList.remove("hidden");
   lizzardImg.classList.remove("hidden");
   game.selectGame("difficult");
-  console.log(`game mode is now ${game.mode}`);
 }
 
 function showHomePage() {
@@ -71,10 +74,10 @@ function pickFighter(event) {
 
 function startGame() {
   if (game.mode === "classic") {
-    var result = game.checkWinClassic();
+    result = game.checkWinClassic();
     console.log("classic result", result);
   } else if (game.mode === "difficult") {
-    var result = game.checkWinDifficult();
+    result = game.checkWinDifficult();
     console.log("difficult result", result);
   }
   game.updateScore(result);
@@ -86,20 +89,37 @@ function startGame() {
 function displayResult() {
   humanWins.innerText = human.wins;
   computerWins.innerText = computer.wins;
-  fightersArr = Array.from(fightersList);
-  console.log("children array is", fightersArr);
-  console.log(fightersArr[0]);
-  // for (var i= 0; i<childrenArr.length; i++){
-  //   if(childrenArr[i].id !== human.fighter && childrenArr[i].id !==computer.fighter){
-  //     fightersBox.childNodes[i].classList.add('hidden')
-  //   }
-  // }
-  // if (result !== "draw") {
-  //   if (result) {
-  //   } else {
-  //     this.player2.wins++;
-  //   }
-  // // }
-  // human.savePlayerToStorage();
-  // computer.savePlayerToStorage();
+  gameView.classList.add("hidden");
+  resultView.classList.remove("hidden");
+
+  switch (result) {
+    case "draw":
+      resultAlert.innerText = "😼 IT'S A DRAW! 😼";
+      break;
+    case true:
+      resultAlert.innerText = "👩‍🌾 HUMAN WINS THIS ROUND! 👩‍🌾";
+      break;
+    case false:
+      resultAlert.innerText = "🖥 COMPUTER WINS THIS ROUND! 🖥";
+    default:
+      break;
+  }
+
+  var humanFighterImg = document.getElementById(`${human.fighter}`);
+  resultBox.appendChild(humanFighterImg.cloneNode());
+  var compFighterImg = document.getElementById(`${computer.fighter}`);
+  resultBox.appendChild(compFighterImg.cloneNode());
+
+  // resultView.setTimeout(backToGame(), 3000);
 }
+
+function backToGame() {
+  resultAlert.innerText = "";
+  resultBox.innerHTML = "";
+  gameView.classList.remove("hidden");
+  resultView.classList.add("hidden");
+}
+
+// }
+// human.savePlayerToStorage();
+// computer.savePlayerToStorage();
