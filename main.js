@@ -25,6 +25,7 @@ fightersBox.addEventListener("click", function (event) {
   pickFighter(event);
   startGame();
   displayResult();
+  setTimeout(backToGame, 1500);
 });
 
 function retrieveWins() {
