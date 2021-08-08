@@ -6,6 +6,7 @@ var goHomeBtn = document.querySelector(".gohome-btn");
 var alienImg = document.getElementById("alien");
 var lizzardImg = document.getElementById("lizzard");
 var fightersBox = document.querySelector(".fighters-box");
+var fightersList = document.querySelectorAll(".fighters-box>img");
 var human;
 var computer;
 var game;
@@ -58,10 +59,43 @@ function showHomePage() {
 }
 
 function pickFighter(event) {
+  event.preventDefault();
   human.fighter = event.target.id;
-  console.log("💎 ~ pickFighter ~ human.fighter", human.fighter);
   var randomIndex = Math.floor(Math.random() * game.fighters.length);
   computer.fighter = game.fighters[randomIndex];
-  console.log("💎 ~ pickFighter ~ computer.fighter", computer.fighter);
-  // computer.fighter =
+  console.log(human.fighter);
+  console.log(computer.fighter);
+}
+
+function startGame() {
+  if ((game.mode = "classic")) {
+    var result = game.checkWinClassic();
+  } else if ((game.mode = "difficult")) {
+    var result = game.checkWinDifficult();
+  }
+  game.updateScore(result);
+
+  console.log(human.wins);
+  console.log(computer.wins);
+}
+
+function displayResult() {
+  humanWins.innerText = human.wins;
+  computerWins.innerText = computer.wins;
+  fightersArr = Array.from(fightersList);
+  console.log("children array is", fightersArr);
+  console.log(fightersArr[0]);
+  // for (var i= 0; i<childrenArr.length; i++){
+  //   if(childrenArr[i].id !== human.fighter && childrenArr[i].id !==computer.fighter){
+  //     fightersBox.childNodes[i].classList.add('hidden')
+  //   }
+  // }
+  // if (result !== "draw") {
+  //   if (result) {
+  //   } else {
+  //     this.player2.wins++;
+  //   }
+  // }
+  human.savePlayerToStorage();
+  computer.savePlayerToStorage();
 }

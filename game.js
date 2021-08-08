@@ -2,6 +2,7 @@ class Game {
   constructor(player1, player2) {
     this.player1 = player1;
     this.player2 = player2;
+    this.mode = "";
     this.fighters = [];
   }
 
@@ -9,16 +10,18 @@ class Game {
     switch (level) {
       case "classic":
         this.fighters = ["rock", "paper", "scissors"];
+        this.mode = "classic";
         break;
       case "difficult":
         this.fighters = ["rock", "paper", "scissors", "alien", "lizzard"];
+        this.mode = "difficult";
     }
   }
 
-  selectFighter(fighter1, fighter2) {
-    this.player1.fighter = fighter1;
-    this.player2.fighter = fighter2;
-  }
+  // selectFighter(fighter1, fighter2) {
+  //   this.player1.fighter = fighter1;
+  //   this.player2.fighter = fighter2;
+  // }
 
   checkWinClassic() {
     //result is in the view of player1, true means player1 wins
@@ -64,10 +67,12 @@ class Game {
   }
 
   updateScore(result) {
-    if (result) {
-      this.player1.wins++;
-    } else {
-      this.player2.wins++;
+    if (result !== "draw") {
+      if (result) {
+        this.player1.wins++;
+      } else {
+        this.player2.wins++;
+      }
     }
   }
 
