@@ -39,8 +39,4 @@
 Bei Zhang (owner of this repository)
 
 ## Screenshots
-
-- Page load
-- Classic game view
-- Difficult game view
-- Result display
+![At page load](assets/page-load.png)
