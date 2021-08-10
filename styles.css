@@ -20,6 +20,7 @@ body {
 footer {
   grid-area: footer;
 }
+
 header {
   grid-area: header;
   font: 600 4rem "Balsamiq Sans", cursive;

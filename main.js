@@ -13,7 +13,6 @@ var resultAlert = document.querySelector(".result-view>h2");
 var human = new Player("Human");
 var computer = new Player("Computer");
 var game;
-var result;
 var humanWins = document.getElementById("human-wins");
 var computerWins = document.getElementById("computer-wins");
 var isClickValid;
@@ -22,7 +21,7 @@ window.addEventListener("load", retrieveWins);
 classicGameBtn.addEventListener("click", showClassicGame);
 difficultGameBtn.addEventListener("click", showDifficultGame);
 goHomeBtn.addEventListener("click", showHomePage);
-startOverBtn.addEventListener("click", clearWins);
+startOverBtn.addEventListener("click", startOver);
 fightersBox.addEventListener("click", function (event) {
   pickFighter(event);
   startGame();
@@ -74,25 +73,14 @@ function pickFighter(event) {
   human.fighter = event.target.id;
   var randomIndex = Math.floor(Math.random() * game.fighters.length);
   computer.fighter = game.fighters[randomIndex];
-  console.log(human.fighter);
-  console.log(computer.fighter);
 }
 
 function startGame() {
   if (isClickValid === false) {
     return;
   }
-  if (game.mode === "classic") {
-    result = game.checkWinClassic();
-    console.log("classic result", result);
-  } else if (game.mode === "difficult") {
-    result = game.checkWinDifficult();
-    console.log("difficult result", result);
-  }
+  result = game.checkWin();
   game.updateScore(result);
-
-  console.log(human.wins);
-  console.log(computer.wins);
 }
 
 function displayResult() {
@@ -137,15 +125,11 @@ function saveResult() {
   if (isClickValid === false) {
     return;
   }
-  console.log("human before saving", human);
   human.saveWinsToStorage();
-  console.log("huamn after saving", human);
-  console.log("comp before saving", computer);
   computer.saveWinsToStorage();
-  console.log("comp after saving", computer);
 }
 
-function clearWins() {
+function startOver() {
   game.resetGame();
   showHomePage();
   retrieveWins();
