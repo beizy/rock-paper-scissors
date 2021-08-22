@@ -38,6 +38,9 @@
 
 Bei Zhang (owner of this repository)
 
+## Project Manager
+- [Robbie Jaeger](https://github.com/robbiejaeger)
+
 ## Screenshots
 ![At page load](assets/page-load.png)
 
