@@ -40,3 +40,6 @@ Bei Zhang (owner of this repository)
 
 ## Screenshots
 ![At page load](assets/page-load.png)
+
+## Deployed page
+[https://lokiandfengshui.github.io/rock-paper-scissors/](https://lokiandfengshui.github.io/rock-paper-scissors/)
